@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>The Eight Chess Queens Problem</title>
+<script language="JavaScript1.2">
+var a
+ 
+function ControlDiag(n, i, j) {
+var offset=0
+for (var ii = j; ii < n; ii++) {
+    offset++;
+    if (((i + offset) < n) && ((j + offset) < n))
+        if (a[i + offset][j + offset]==1)
+            return false;
+}
+ 
+offset = 0;
+ 
+for (ii = j; ii >= 0; ii--) {
+    offset++;
+    if (((i - offset) >= 0) && ((j - offset) >= 0))
+        if (a[i - offset][j - offset]==1)
+            return false;
+}
+ 
+offset = 0;
+ 
+for (ii = i; ii >= 0; ii--) {
+    offset++;
+    if (((j + offset) < n) && ((i - offset) >= 0))
+        if (a[i - offset][j + offset]==1)
+            return false;
+}
+ 
+offset = 0;
+ 
+for (ii = i; ii < n; ii++) {
+    offset++;
+    if (((j - offset) >= 0) && ((i + offset) < n))
+        if (a[i + offset][j - offset]==1)
+            return false;
+}
+return true;
+}
+ 
+function ControlFilCol(n, i, j){
+var x=0,y=0
+for (var ii=0;ii<n;ii++){
+    if (a[i][ii]==1) x++
+    if (a[ii][j]==1) y++
+}
+if (x>0 || y>0) return false
+else return true
+}
+ 
+function indeces(n, ind){
+var i = parseInt(ind.name.charAt(0))
+var j = parseInt(ind.name.charAt(1))
+if (!ind.checked) {
+    ind.checked=false
+    a[i][j]=0
+    return
+}
+if (ControlFilCol(n, i, j) && ControlDiag(n, i, j)) {
+    ind.checked=true
+    a[i][j]=1
+}
+else {
+    ind.checked=false
+    a[i][j]=0
+}
+}
+ 
+function table(n){
+document.write("<FORM>")
+document.write("<TABLE border=3 BGCOLOR=black CELLPADDING=2 CELLSPACING=2>")
+a = new Array(n)
+var z=0
+for (var i=0; i<n; i++){
+    a[i] = new Array(n)
+    for (var j=0; j<n; j++){
+        a[i][j] = 0
+        document.write("<TD WIDTH=30 HEIGHT=30 ALIGN=center")
+        if (z == 1)
+            {document.write(" BGCOLOR=red>")
+                z=0}
+        else
+            {document.write(" BGCOLOR=white>")
+                z=1}
+        document.write("<INPUT TYPE=checkbox NAME=")
+        document.write(String(i)+String(j))
+        document.write(" VALUE=false onClick='indeces(")
+        document.write(n + ", this)'>")
+    }
+    document.writeln("<TR>")
+    if (z==0) z=1 
+    else z=0
+}
+document.write("</TABLE>")
+document.write("</FORM>")
+}
+ 
+</script>
+</head>
+<body>
+<CENTER>
+<TABLE WIDTH="580">
+<TD BGCOLOR="#ffb400" ALIGN="center"><FONT SIZE="+3" COLOR="brown"><B>The Eight Chess Queens Problem</FONT><TR>
+<TD BGCOLOR="#fcead4">
+<FONT SIZE="+1" COLOR="black">This is the famous 'Eight Chess Queens Problem' : Put eight queens on the chessboard no threating each other.</FONT><TR>
+<TD BGCOLOR="#fcead4">
+<FONT SIZE="+1" COLOR="black">There are 92 solutions of 8!=40320 permutations.
+<BR>It�s not too difficult to get a solution just trying.
+</TABLE>
+<HR WIDTH="580">
+ 
+<script language="JavaScript1.2">
+table(8)
+</script>
+ 
+<BR><FONT SIZE="-2">&copy;<I>1997 J. Bautista</I></FONT>
+<BR><A HREF="AllSol.html" TARGET="xyz"><FONT COLOR="brown"><B>SOLUTIONS</A></B></FONT>
+<CENTER>
+<P>
+<HR WIDTH="580">
+Send <A HREF="mailto:reejuba@madrid.ericsson.se">comments</A> to the author.
+<HR WIDTH="580">
+</body>
+</html>
