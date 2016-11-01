@@ -14,7 +14,7 @@ Created by: Cezary Tomczak | http://gosu.pl/Licensed under: BSD
  * copyright messages are intact.
  */
 
-/**
+/*
  * Tetris Game
  * Initializes the buttons automatically, no additional actions required
  *
